@@ -16,6 +16,10 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     System.Obesity
+                     , System.Obesity.Lang
+                     , System.Obesity.Lang.Haskell
+                     , System.Obesity.Lang.Purescript
+                     , System.Obesity.Lang.Golang
                      , System.Obesity.Types
   build-depends:       base >= 4.7 && < 5
                      , optparse-generic
