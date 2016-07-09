@@ -1,4 +1,7 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeOperators     #-}
 
 module System.Obesity.Types (
   Options (..)
@@ -6,20 +9,27 @@ module System.Obesity.Types (
 
 
 
-import           Data.Text     (Text)
-import           Data.Typeable (Typeable)
-import           GHC.Generics  (Generic)
-import Options.Generic
+import           Data.Text       (Text)
+import           Data.Typeable   (Typeable)
+import           GHC.Generics    (Generic)
+import           Options.Generic
 
 
 
 data Options = Options {
-  optNumTypes        :: Int,
-  optSeparateModules :: Bool,
-  optExplicitImports :: Bool,
-  optExplicitExports :: Bool
-} deriving (Show, Read, Eq, Generic, Typeable)
+  numTypes        :: Int  <?> "number of types to create",
+  separateModules :: Bool <?> "create types in separate files or the same file",
+  explicitImports :: Bool <?> "be explicit about imports",
+  explicitExports :: Bool <?> "be explicit about exports"
+} deriving (Show, Generic, Typeable)
+
+
+
+data Cli
+  = Generate Options Text
+  deriving (Show, Generic, Typeable)
 
 
 
 instance ParseRecord Options
+-- instance ParseRecord Cli
